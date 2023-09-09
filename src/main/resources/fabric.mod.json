@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "chatzone",
+	"version": "${version}",
+	"name": "ChatZone",
+	"description": "Makes chatting in a specific location (like continous /msg) easy!",
+	"authors": [
+		"TheMasterKitty"
+	],
+	"license": "CC0-1.0",
+	"icon": "assets/chatzone/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"themasterkitty.chatzone.Server"
+		],
+		"client": [
+			"themasterkitty.chatzone.Main"
+		]
+	},
+	"mixins": [
+		{
+			"config": "chatzone.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.19.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
