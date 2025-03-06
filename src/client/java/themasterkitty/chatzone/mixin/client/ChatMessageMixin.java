@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import themasterkitty.chatzone.Main;
 
 import java.util.Objects;
@@ -16,12 +16,12 @@ public abstract class ChatMessageMixin {
 	@Shadow public abstract String normalize(String chatText);
 
 	@Inject(at = @At("HEAD"), method = "sendMessage", cancellable = true)
-	private void sendChatMessage(String dirtyMessage, boolean _addToHistory, CallbackInfoReturnable<Boolean> ci) {
-		String message = normalize(dirtyMessage);
+	private void sendChatMessage(String chatText, boolean addToHistory, CallbackInfo ci) {
+		String message = normalize(chatText);
 
 		if (message.startsWith("/")) return;
 		if (!Objects.equals(Main.command, "") && !Main.regularChat) {
-			ci.setReturnValue(true);
+			ci.cancel();
 			assert MinecraftClient.getInstance().player != null;
 			if (Main.command.startsWith(("/")))
 				MinecraftClient.getInstance().player.networkHandler.sendCommand(Main.command.substring(1) + message);

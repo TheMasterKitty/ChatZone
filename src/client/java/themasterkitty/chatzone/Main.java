@@ -10,6 +10,7 @@ import net.minecraft.text.Text;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
+
 public class Main implements ClientModInitializer {
 	public static String command = "";
 	public static boolean regularChat = false;
